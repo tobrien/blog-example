@@ -1,0 +1,54 @@
+-@ var body: String
+-@ var title: String
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %title= title
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    /[if lt IE 9]
+
+    %link{:href => "/blog-example/bootstrap/css/bootstrap.css", :rel => "stylesheet"}/
+    :css
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+        %link{:href => "/blog-example/bootstrap/css/bootstrap-responsive.min.css", :rel => "stylesheet"}/
+
+    %link{:href => "images/favicon.ico", :rel => "shortcut icon"}/
+    %link{:href => "images/apple-touch-icon.png", :rel => "apple-touch-icon"}/
+    %link{:href => "images/apple-touch-icon-72x72.png", :rel => "apple-touch-icon", :sizes => "72x72"}/
+    %link{:href => "images/apple-touch-icon-114x114.png", :rel => "apple-touch-icon", :sizes => "114x114"}/
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand{:href => "#"} Blog Example
+          .nav-collapse
+            %ul.nav
+              %li.active
+                %a{:href => "#"} Home
+              %li
+                %a{:href => "#about"} Last Posts
+              %li
+                %a{:href => "#contact"} Show Users
+            %ul.nav.pull-right
+              - if( 3 == 3 )
+                %li
+                  %a{:href => "/blog-example/users/sign-in.html"} Sign in
+                %li
+                  %a{:href => "/blog-example/users/sign-up.html"} Sign up
+              - else
+                %li
+                  %a{:href => "#sign-out"} Sign out
+
+    .container
+      %h1= title
+      - unescape(body)
+
+    %script{:src => "/blog-example/bootstrap/js/bootstrap.min.js"}

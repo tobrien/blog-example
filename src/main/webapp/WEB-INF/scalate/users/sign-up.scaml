@@ -1,0 +1,28 @@
+- attributes("title") = "Sign up for Blog Example"
+!!! 5
+%form.form-horizontal{ :method => "post", :action => "/blog-example/users/sign-up.html"}
+  .control-group
+    .control-label{ :for => "firstName" } First Name
+    .controls
+      %input#firstName{ :type => "text", :placeholder => "John" }/
+  .control-group
+    .control-label{ :for => "lastName" } Last Name
+    .controls
+      %input#lastName{ :type => "text", :placeholder => "Smith" }/
+  .control-group
+    .control-label{ :for => "email" } E-mail Address
+    .controls
+      %input#email{ :type => "text", :placeholder => "you@example.com" }/
+  .control-group
+    .control-label{ :for => "password" } Password
+    .controls
+      %input#password{ :type => "password" }/
+  .control-group
+    .control-label{ :for => "passwordConfirm" } Password Confirmation
+    .controls
+      %input#passwordConfirm{ :type => "password" }/
+  .control-group
+    .controls
+      %button.btn{ :type => "submit" } Sign-up for Blog Example
+
+  Hello there

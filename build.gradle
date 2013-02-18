@@ -1,0 +1,73 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'jetty'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "1.4"
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    bootstrap
+}
+
+dependencies {
+    compile group: 'org.springframework', name: 'spring-orm', version: '3.2.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-tx', version: '3.2.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version: '3.2.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-core', version: '3.2.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-test', version: '3.2.0.RELEASE'
+
+    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.2.0.RELEASE'
+
+    compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.0-api', version: '1.0.0.Final'
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.1.4.Final'
+
+    compile group: 'org.hsqldb', name: 'hsqldb', version: '2.2.8'
+
+    compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'
+
+    compile group: 'log4j', name: 'log4j', version:'1.2.16'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.6.6'
+
+    compile group: 'org.scala-lang', name: 'scala-compiler', version: '2.10.0'
+    compile group: 'org.fusesource.scalate', name: 'scalate-spring-mvc_2.10', version: '1.6.1'
+    compile group: 'org.fusesource.scalate', name: 'scalate-wikitext_2.10', version: '1.6.1'
+    compile group: 'org.fusesource.scalate', name: 'scalate-page_2.10', version: '1.6.1'
+    compile group: 'org.fusesource.scalamd', name: 'scalamd_2.10', version: '1.6'
+
+    bootstrap group: 'com.efsavage.twitter.bootstrap', name: 'bootstrap-maven', version: '2.1.1'
+
+    testCompile group: 'org.fusesource.scalate', name: 'scalate-test_2.10', version: '1.6.1'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+
+}
+
+test {
+  testLogging {
+      showStandardStreams = true
+  }
+}
+
+// This task places the Twitter Bootstrap CSS and JS into the WAR file
+task explodeBootstrap(type: Copy){
+  configurations.bootstrap.filter { it.toString().endsWith(".jar") }.each{
+    from zipTree(it).matching{
+        include 'com/twitter/**'
+    }
+  }
+  eachFile {details ->
+    details.path = details.path.replaceAll('com/twitter/', '')
+  }
+  into 'src/main/webapp'
+}
+
+// explodeBootstrap is our own task and we need to insert it into the task dependencies
+war.dependsOn << explodeBootstrap
+jettyRun.dependsOn << explodeBootstrap
+
+stopPort = 9091
+httpPort = 9090
