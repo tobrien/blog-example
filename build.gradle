@@ -39,6 +39,10 @@ dependencies {
     compile group: 'org.fusesource.scalate', name: 'scalate-page_2.10', version: '1.6.1'
     compile group: 'org.fusesource.scalamd', name: 'scalamd_2.10', version: '1.6'
 
+    compile group: 'com.google.guava', name: 'guava', version: '14.0'
+
+    compile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+
     bootstrap group: 'com.efsavage.twitter.bootstrap', name: 'bootstrap-maven', version: '2.1.1'
 
     testCompile group: 'org.fusesource.scalate', name: 'scalate-test_2.10', version: '1.6.1'

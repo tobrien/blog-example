@@ -1,0 +1,18 @@
+- attributes("title") = "Sign up for Blog Example"
+-@ val user: com.discursive.blog.model.User
+!!! 5
+%form.form-horizontal{ :id => "user", :method => "post", :action => "/blog-example/users/sign-up"}
+  .control-group
+    .control-label{ :for => "firstName" } First Name
+    .controls
+      = user.getFirstName
+  .control-group
+    .control-label{ :for => "lastName" } Last Name
+    .controls
+      = user.getLastName
+  .control-group
+    .control-label{ :for => "email" } E-mail Address
+    .controls
+      = user.getEmail
+
+  Hello there

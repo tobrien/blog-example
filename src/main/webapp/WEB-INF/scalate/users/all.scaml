@@ -1,0 +1,9 @@
+- attributes("title") = "Sign up for Blog Example"
+-@ val users: java.util.ArrayList[com.discursive.blog.model.User]
+!!! 5
+- for(user <- users)
+  %p
+    = user.getFirstName
+    = user.getLastName
+    - var url =  "/blog-example/users/profile/%d".format( user.getId )
+    %a{ :href => url } View

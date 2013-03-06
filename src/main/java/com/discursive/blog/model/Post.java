@@ -11,7 +11,7 @@ import java.util.Set;
 public class Post extends AbstractPersistable<Long> {
 
     @ManyToOne
-    public User user;
+    private User user;
 
     private String title;
     private String body;
@@ -23,7 +23,7 @@ public class Post extends AbstractPersistable<Long> {
         joinColumns={ @JoinColumn (name="postId", referencedColumnName="id") },
         inverseJoinColumns={ @JoinColumn (name="tagId", referencedColumnName="id") }
     )
-    public Set<Tag> tags;
+    private Set<Tag> tags;
 
     public Post() {}
 
